@@ -8,7 +8,7 @@ public class MxCaptchaOptions
 
     public bool UseNumbers { get; set; } = true;
 
-    public bool UseLetters { get; set; } = true;
+    public bool UseLetters { get; set; } = false;
 
     public bool CaseSensitive { get; set; } = false;
 
