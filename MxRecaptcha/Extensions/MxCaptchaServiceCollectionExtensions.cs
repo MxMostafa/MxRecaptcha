@@ -3,9 +3,6 @@ using MxCaptcha.Abstractions;
 using MxCaptcha.Options;
 using MxCaptcha.Services;
 using MxRecaptcha.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MxCaptcha.Extensions;
 
@@ -21,7 +18,7 @@ public static class MxCaptchaServiceCollectionExtensions
         services.AddMemoryCache();
         services.AddSingleton<IMxCaptchaService, MxCaptchaService>();
         services.AddSingleton<ICaptchaCodeGenerator, RandomCaptchaCodeGenerator>();
-        services.AddSingleton<ICaptchaImageGenerator, ImageSharpCaptchaImageGenerator>();
+        services.AddSingleton<ICaptchaImageGenerator, SkiaSharpCaptchaImageGenerator>();
         services.AddSingleton<ICaptchaStore, MemoryCaptchaStore>();
 
         return services;

@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Options;
 using MxCaptcha.Options;
-using MxCaptcha.Services;
 using Xunit;
 
 namespace MxRecaptcha.Tests;
