@@ -102,8 +102,7 @@ const data = await res.json();
 
 captchaId = data.id;
 
-document.getElementById("captchaImage").src =
-"data:image/png;base64," + data.base64Image;
+document.getElementById("captchaImage").src = data.base64Image;
 
 document.getElementById("captchaCode").value = "";
 document.getElementById("result").innerHTML = "";
