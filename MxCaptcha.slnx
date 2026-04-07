@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MxCaptcha.AspNet/MxCaptcha.AspNet.csproj" />
+  <Project Path="MxRecaptcha/MxCaptcha.csproj" />
+  <Project Path="tests/MxRecaptcha.Tests/MxRecaptcha.Tests.csproj" />
+</Solution>
