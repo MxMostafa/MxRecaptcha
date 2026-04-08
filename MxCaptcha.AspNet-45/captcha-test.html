@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MxCaptcha Test</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .captcha-img {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #1976d2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background: #125aa0;
+            }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Captcha Test</h2>
+
+        <img id="captchaImage" class="captcha-img" width="200" height="80" />
+
+        <button onclick="loadCaptcha()">Refresh Captcha</button>
+
+        <input id="captchaCode" placeholder="Enter captcha code" />
+
+        <button onclick="verifyCaptcha()">Verify</button>
+
+        <div id="result" class="result"></div>
+
+    </div>
+
+    <script>
+
+let captchaId = null;
+
+async function loadCaptcha(){
+
+const res = await fetch("http://localhost:5005/captcha");
+const data = await res.json();
+
+captchaId = data.id;
+
+document.getElementById("captchaImage").src = data.base64Image;
+
+document.getElementById("captchaCode").value = "";
+document.getElementById("result").innerHTML = "";
+}
+
+async function verifyCaptcha(){
+
+const code = document.getElementById("captchaCode").value;
+
+if(!code){
+alert("Enter captcha code");
+return;
+}
+
+const res = await fetch("http://localhost:5005/captcha/verify",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+id: captchaId,
+code: code
+})
+});
+
+const text = await res.text();
+
+const resultEl = document.getElementById("result");
+
+if(res.ok){
+resultEl.innerHTML = "✅ Success: " + text;
+resultEl.className = "result success";
+}else{
+resultEl.innerHTML = "❌ Failed: " + text;
+resultEl.className = "result error";
+}
+}
+
+window.onload = loadCaptcha;
+
+    </script>
+
+</body>
+</html>
