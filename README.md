@@ -1,4 +1,5 @@
 # MxCaptcha
+<img width="447" height="461" alt="image" src="https://github.com/user-attachments/assets/b6926391-b01a-4307-b717-91e28766fdb3" />
 
 A configurable CAPTCHA library for **ASP.NET (.NET 10)** and **ASP.NET (.NET Framework 4.5)** with image generation, validation, and optional cache/Redis-backed storage.
 
@@ -57,6 +58,7 @@ MxCaptcha/
 ├── MxCaptcha.AspNet-45/       # Sample project for .NET Framework 4.5
 ├── captcha-test.html          # Simple UI to test captcha generation/validation
 └── src / library code         # Main captcha library source
+
 
 
 
